@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Key Findings - Safe Food, Stronger Lives</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f5f5f5;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            background-color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .logo-icon {
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(45deg, #4CAF50, #8BC34A);
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .logo-icon::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #666;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+        }
+
+        .nav-menu a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #4CAF50, #8BC34A);
+            border-radius: 8px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        .nav-menu a:hover {
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .nav-menu a:hover::before {
+            opacity: 1;
+        }
+
+        .nav-menu a.active::before {
+            opacity: 1;
+        }
+
+        .nav-menu a.active {
+            color: white;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .findings-container {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .findings-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .findings-header {
+            background: linear-gradient(135deg, #4CAF50, #8BC34A);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .findings-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .findings-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .findings-content {
+            padding: 2.5rem;
+        }
+
+        .survey-intro {
+            font-size: 1.1rem;
+            color: #333;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #f8f9fa, #e8f5e8);
+            border-radius: 8px;
+            border-left: 4px solid #4CAF50;
+        }
+
+        .findings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .finding-card {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #4CAF50;
+            transition: all 0.3s ease;
+        }
+
+        .finding-card:hover {
+            background-color: #e8f5e8;
+            transform: translateY(-2px);
+        }
+
+        .finding-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .finding-icon {
+            font-size: 1.5rem;
+        }
+
+        .finding-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #4CAF50;
+        }
+
+        .finding-stat {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #4CAF50;
+            margin-bottom: 0.5rem;
+        }
+
+        .finding-text {
+            font-size: 1rem;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .survey-photos-section {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .survey-photos-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .photos-header {
+            background: linear-gradient(135deg, #2196F3, #64B5F6);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .photos-content {
+            padding: 2.5rem;
+        }
+
+        .photos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .photo-card {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .photo-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .photo-placeholder {
+            width: 100%;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            color: #1976d2;
+            font-size: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .photo-placeholder::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .photo-actual {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            
+        }
+
+        .photo-caption {
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .photo-title {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .photo-description {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        .upload-instructions {
+            background: linear-gradient(135deg, #f3e5f5, #e1bee7);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid #9c27b0;
+        }
+
+        .upload-instructions h4 {
+            color: #7b1fa2;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .upload-instructions p {
+            color: #333;
+            font-size: 0.95rem;
+        }
+
+        .conclusion-section {
+            background: linear-gradient(135deg, #fff3e0, #fff8e1);
+            padding: 2rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+            border-left: 4px solid #ff9800;
+        }
+
+        .conclusion-title {
+            color: #f57c00;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .conclusion-text {
+            color: #333;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #e8f5e8 0%, #e8f5e8 100%);
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-weight: 600;
+            color: #2e7d32;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-menu {
+                flex-wrap: wrap;
+                gap: 1rem;
+                justify-content: center;
+            }
+
+            .main-content {
+                padding: 1rem;
+            }
+
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .findings-header {
+                padding: 1.5rem;
+            }
+
+            .findings-content {
+                padding: 1.5rem;
+            }
+
+            .findings-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-title {
+                font-size: 1.8rem;
+            }
+
+            .findings-title {
+                font-size: 1.5rem;
+            }
+
+            .finding-card {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo-icon"></div>
+                <a href="./index.html" style="text-decoration: none; color: #333;">Safe Food, Stronger Lives</a>
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="./about.html">About</a></li>
+                    <li><a href="./abstract.html">Abstract</a></li>
+                    <li><a href="./Findings.html" class="active">Key Findings</a></li>
+                    <li><a href="#solution">Solution</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="page-header">
+            <h1 class="page-title">Key Findings</h1>
+            <p class="page-subtitle">Insights from our comprehensive survey on chemical usage in agriculture</p>
+        </div>
+
+        
+
+        <div class="findings-container">
+            <div class="findings-header">
+                <div class="findings-icon">📊</div>
+                <h2 class="findings-title">Survey Results</h2>
+            </div>
+            <div class="findings-content">
+                <div class="survey-intro">
+                    <strong>Survey Overview:</strong> Through our comprehensive survey conducted in the first 3 weeks, we gathered valuable insights from consumers, vendors, and farmers about chemical usage in agriculture and its health implications.
+                </div>
+
+                <div class="findings-grid">
+                    <div class="finding-card">
+                        <div class="finding-header">
+                            <div class="finding-icon">👥</div>
+                            <h3 class="finding-title">Consumer Awareness</h3>
+                        </div>
+                        <div class="finding-stat">70%</div>
+                        <p class="finding-text">
+                            Of people are aware about the chemicals being used in fruits and vegetables, but they are <span class="highlight">not aware about the health effects</span> of these chemicals.
+                        </p>
+                    </div>
+
+                    <div class="finding-card">
+                        <div class="finding-header">
+                            <div class="finding-icon">🏪</div>
+                            <h3 class="finding-title">Vendor Perspective</h3>
+                        </div>
+                        <p class="finding-text">
+                            Vendors are aware of the health effects of chemicals, but they are <span class="highlight">not willing to sell organic produce</span> as they don't get enough profit. There is also <span class="highlight">no demand for organic items</span> in the market.
+                        </p>
+                    </div>
+
+                    <div class="finding-card">
+                        <div class="finding-header">
+                            <div class="finding-icon">🌾</div>
+                            <h3 class="finding-title">Farmer Practices</h3>
+                        </div>
+                        <div class="finding-stat">90%</div>
+                        <p class="finding-text">
+                            Of farmers surveyed are using <span class="highlight">chemical fertilizers and pesticides</span> while farming. Even though they know about health effects, they prioritize higher yields and profits over organic methods.
+                        </p>
+                    </div>
+                </div>
+<div class="survey-photos-section">
+    <div class="photos-header">
+        <div class="findings-icon">📸</div>
+        <h2 class="findings-title">Survey Documentation</h2>
+    </div>
+    <br><br>
+
+    <div class="photos-content">
+        <div class="upload-instructions">
+            <h4><span>📋</span> Photo Documentation</h4>
+            <p>Visual evidence from our field survey conducted across various locations, documenting interactions with consumers, vendors, and farmers.</p>
+        </div>
+
+        <h1 align="center">Consumer Survey</h1>
+        <div class="photos-grid">
+            <div class="photo-card">
+                <img class="photo-actual" src="./015.jpg" alt="Consumer Survey Photo" />
+                <div class="photo-caption">
+                    <div class="photo-title">Consumer Survey</div>
+                    <div class="photo-description">Survey with local consumers about chemical usage in fruits and vegetables.</div>
+                </div>
+            </div>
+            <div class="photo-card">
+                <img class="photo-actual" src="./016.jpg" alt="Consumer Survey Photo" />
+                <div class="photo-caption">
+                    <div class="photo-title">Consumer Interaction</div>
+                    <div class="photo-description">Discussing awareness and health concerns with local consumers.</div>
+                </div>
+            </div>
+            <div class="photo-card">
+                <img class="photo-actual" src="./017.jpg" alt="Consumer Survey Photo" />
+                <div class="photo-caption">
+                    <div class="photo-title">Consumer Awareness</div>
+                    <div class="photo-description">Educating consumers about the risks of chemical consumption.</div>
+                </div>
+            </div>
+        </div>
+
+        <h1 align="center">Vendor Interview</h1>
+        <div class="photos-grid">
+            <div class="photo-card">
+                <img class="photo-actual" src="./010.jpg" alt="Vendor Interview Photo" />
+                <div class="photo-caption">
+                    <div class="photo-title">Vendor Interview</div>
+                    <div class="photo-description">Discussing chemical effects and organic alternatives with local vendors.</div>
+                </div>
+            </div>
+            <div class="photo-card">
+                <img class="photo-actual" src="./012.jpg" alt="Vendor Interview Photo" />
+                <div class="photo-caption">
+                    <div class="photo-title">Vendor Perspective</div>
+                    <div class="photo-description">Understanding vendor reluctance toward selling organic products.</div>
+                </div>
+            </div>
+            <div class="photo-card">
+                <img class="photo-actual" src="./013.jpg" alt="Vendor Interview Photo" />
+                <div class="photo-caption">
+                    <div class="photo-title">Market Visit</div>
+                    <div class="photo-description">Surveying market stalls and collecting vendor feedback.</div>
+                </div>
+            </div>
+        </div>
+
+        <h1 align="center">Farmer Discussion</h1>
+        <div class="photos-grid">
+            <div class="photo-card">
+                <img class="photo-actual" src="./003.jpg" alt="Farmer Discussion Photo" />
+                <div class="photo-caption">
+                    <div class="photo-title">Farmer Discussion</div>
+                    <div class="photo-description">Understanding chemical usage patterns in farming practices.</div>
+                </div>
+            </div>
+            <div class="photo-card">
+                <img class="photo-actual" src="./006.png" alt="Farmer Discussion Photo" />
+                <div class="photo-caption">
+                    <div class="photo-title">Farming Practices</div>
+                    <div class="photo-description">Interacting with farmers to explore organic farming possibilities.</div>
+                </div>
+            </div>
+            <div class="photo-card">
+                <img class="photo-actual" src="./007.png" alt="Farmer Discussion Photo" />
+                <div class="photo-caption">
+                    <div class="photo-title">Agricultural Field Visit</div>
+                    <div class="photo-description">On-field observations and conversations with local farmers.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+                <div class="conclusion-section">
+                    <h3 class="conclusion-title">
+                        <span>💡</span>
+                        Key Conclusions
+                    </h3>
+                    <p class="conclusion-text">
+                        The main reason for chemical usage in farming is the <span class="highlight">lack of awareness about health effects</span> and the <span class="highlight">lack of demand for organic items</span> in the market. Based on these findings, we decided to create awareness about the effects of these chemicals on health and provide alternatives to farmers and vendors to switch to organic farming and selling.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
